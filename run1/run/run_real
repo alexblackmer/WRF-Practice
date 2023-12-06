@@ -1,0 +1,38 @@
+#!/bin/csh
+#####################################################
+# machine set up (users should change this part)
+#####################################################
+#
+#SBATCH --time=01:30:00 
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=24  
+#SBATCH --account=garrett
+#SBATCH --partition=kingspeak
+#SBATCH -J real
+#SBATCH -o slurm-%j.out-%N 
+#SBATCH -e slurm-%j.err-%N 
+
+source /scratch/general/vast/u0439327/ATMOS6500/env.sh
+
+
+rm -rf rsl.*
+
+
+# run program
+#/uufs/chpc.utah.edu/sys/pkg/mpich2/1.2pr5/bin/mpdboot -n 1 -f $PBS_NODEFILE -r /usr/bin/rsh
+#mpiexec -n 12 ./real.exe
+#/uufs/ember.arches/sys/pkg/mvapich2/std_pgi/bin/mpirun_rsh -np 48 -hostfile $PBS_NODEFILE ./real.exe
+
+
+#setenv NETCDF /uufs/chpc.utah.edu/sys/pkg/netcdf/std_intel
+
+# load appropriate modules, in this case Intel compilers, MPICH2
+# module purge
+# module load intel mpich
+#
+#module load intel/18 impi/18 hdf5 netcdf-c netcdf-f
+
+#setenv NETCDF /uufs/chpc.utah.edu/sys/installdir/netcdf/i18
+
+
+mpirun -np $SLURM_NTASKS ./real.exe
