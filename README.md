@@ -1,6 +1,6 @@
 # WRF-Practice
-This is a collection of WRF practice I produced during my Numerical Weather Prediction class at the University of Utah.
-
+This is a partial codebase for the WRF practice I produced during my Numerical Weather Prediction class at the University of Utah.
+Only the driving namelist and batch files are included due to storage restraints.
 ## Case
 
 ## Workflow
