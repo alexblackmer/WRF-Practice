@@ -1,0 +1,36 @@
+#!/bin/csh
+#####################################################
+# machine set up (users should change this part)
+#####################################################
+#
+#SBATCH --time=4:30:00 
+#SBATCH --nodes=1
+#SBATCH --ntasks=32
+#SBATCH --partition=kingspeak-shared
+#SBATCH --account=garrett
+#SBATCH -J wps
+#SBATCH -o slurm-%j.out-%N 
+#SBATCH -e slurm-%j.err-%N 
+
+
+source /scratch/general/vast/u0439327/ATMOS6500/env.sh
+
+
+
+
+# load appropriate modules, in this case Intel compilers, MPICH2
+#module purge
+#module load intel mpich
+# for MPICH2 over Ethernet, set communication method to TCP - for general lonepeak nodes
+# see above for network interface selection options for other MPI distributions
+#setenv MPICH_NEMESIS_NETMOD tcp
+# run the program
+# see above for other MPI distributions 
+
+
+./geogrid.exe 
+./ungrib.exe 
+./metgrid.exe 
+
+exit 0
+
